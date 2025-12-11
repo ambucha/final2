@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <deque>
 using namespace std;
 
 // Milestone 1
@@ -10,6 +11,11 @@ using namespace std;
 // seems this time the isntructions did not say to not write comments so i will just write them
 // ok so lets start off by making the struct that has the customer name and drink order
 // im also gonna just put the custumer struct inside the double linked list
+// ok but now we can make a struct to sue in the deque as i believe that is easier
+struct Muffin{
+    string name;
+    string muffin;
+}
 
 // lemme try to find an old project with a linked list so i can modify that code
 // found a doubly linked list from my lab-22 repo, gonna modify it to fit this assignment
@@ -106,10 +112,18 @@ int main() {
         "Espresso", "Iced Coffee", "Vanilla Latte", "Caramel Latte"
     };
 
+    vector<string> muffins = {
+        "Blueberry Muffin", "Chocolate Chip Muffin", "Banana Nut Muffin",
+        "Corn Muffin", "Pumpkin Muffin", "Bran Muffin", "Lemon Poppy Muffin"
+    };
+
     Coffee coffeeLine;
+    
+    // muffin booth here, needs to store both name and drink
+    deque<Muffin> muffinLine; 
 
     // ok now i gotta excercise the things done in this milestone, so i can just add liek 2 random customers and then serve one to test
-    // milestone 2 i needa add 3 people to the line
+    // milestone 2 i needa add 3 people to the line, now we need to add three to bnoth the muffin and coffee both
     for(int i = 0; i < 3; i++){
         string n = names[rand() % names.size()];
         string d = drinks[rand() % drinks.size()];
@@ -120,7 +134,8 @@ int main() {
 
     // i need to run the sim for 10 rounds now so lets get a for loop going
     for(int i = 1; i <= 10; i++){
-        cout << "Round #" << i << ":" << endl;
+        // changin the formatting a bit here to look a little nicer
+        cout << "------|Round #" << i << "|------" << endl;
 
         // gotta add a 50% chance for someone joining, so mod 2 == 1 should simulate that 
         if(rand() % 2 == 1){
