@@ -15,7 +15,7 @@ using namespace std;
 struct Muffin{
     string name;
     string muffin;
-}
+};
 
 // lemme try to find an old project with a linked list so i can modify that code
 // found a doubly linked list from my lab-22 repo, gonna modify it to fit this assignment
@@ -128,8 +128,13 @@ int main() {
         string n = names[rand() % names.size()];
         string d = drinks[rand() % drinks.size()];
         coffeeLine.push_back(n, d);
-        // since later imma have different booths lemme be more specific here
-        cout << "Waiting at the coffee booth: " << n << " [" << d << "]" << endl;
+        // since later imma have different booths lemme be more specific here, doesnt actually say in the assignemnt to say whos in the line at the start
+
+        // add code for muffin people
+        Muffin m;
+        m.name = names[rand() % names.size()];
+        m.muffin = muffins[rand() % muffins.size()];
+        muffinLine.push_back(m);
     }
 
     // i need to run the sim for 10 rounds now so lets get a for loop going
@@ -157,6 +162,30 @@ int main() {
         else{
             cout << "\tServed at the coffee booth: No one" << endl;
         }
+
+        // muffin booth simulation code
+        if(rand() % 2 == 1){
+            Muffin m;
+            m.name = names[rand() % names.size()];
+            m.muffin = muffins[rand() % muffins.size()];
+            muffinLine.push_back(m);
+            cout << "\tJoined the muffin line: " << m.name << " [" << m.muffin << "]" << endl;
+        }
+        else {
+            cout << "\tJoined the muffin line: No one" << endl;
+        }
+
+        // every round the first person in line needs to be served
+        // check if the muffin line is empty before serving
+        if(!muffinLine.empty()){
+            Muffin served = muffinLine.front();
+            muffinLine.pop_front();
+            cout << "\tServed at the muffin booth: " << served.name << " [" << served.muffin << "]" << endl;
+        }
+        else{
+            cout << "\tServed at the muffin booth: No one" << endl;
+        }
+
     }
     
     return 0;
