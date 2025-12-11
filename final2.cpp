@@ -17,6 +17,11 @@ struct Muffin{
     string muffin;
 };
 
+struct Bracelet{
+    string name;
+    string bracelet;
+};
+
 // lemme try to find an old project with a linked list so i can modify that code
 // found a doubly linked list from my lab-22 repo, gonna modify it to fit this assignment
 // imma honestly keep it as a DLL
@@ -117,10 +122,19 @@ int main() {
         "Corn Muffin", "Pumpkin Muffin", "Bran Muffin", "Lemon Poppy Muffin"
     };
 
+    vector<string> bracelets = {
+        "Gold Bracelet", "Silver Bracelet", "Rainbow Bracelet",
+        "Green Bracelet", "White Bracelet", "Purple Bracelet",
+        "Red Bracelet", "Braided Bracelet", "Black Bracelet", "Yellow Bracelet"
+    };
+
     Coffee coffeeLine;
     
     // muffin booth here, needs to store both name and drink
     deque<Muffin> muffinLine; 
+
+    // bracelet line
+    vector<Bracelet> braceletLine;
 
     // ok now i gotta excercise the things done in this milestone, so i can just add liek 2 random customers and then serve one to test
     // milestone 2 i needa add 3 people to the line, now we need to add three to bnoth the muffin and coffee both
@@ -135,6 +149,12 @@ int main() {
         m.name = names[rand() % names.size()];
         m.muffin = muffins[rand() % muffins.size()];
         muffinLine.push_back(m);
+
+        // add code for the bracelet people
+        Bracelet b;
+        b.name = names[rand() % names.size()];
+        b.bracelet = bracelets[rand() % bracelets.size()];
+        braceletLine.push_back(b);
     }
 
     // i need to run the sim for 10 rounds now so lets get a for loop going
@@ -163,6 +183,8 @@ int main() {
             cout << "\tServed at the coffee booth: No one" << endl;
         }
 
+        cout << endl;
+
         // muffin booth simulation code
         if(rand() % 2 == 1){
             Muffin m;
@@ -186,6 +208,29 @@ int main() {
             cout << "\tServed at the muffin booth: No one" << endl;
         }
 
+        cout << endl;
+
+        // bracelet time
+        if(rand() % 2 == 1){
+            Bracelet b;
+            b.name = names[rand() % names.size()];
+            b.bracelet = bracelets[rand() % bracelets.size()];
+            braceletLine.push_back(b);
+            cout << "\tJoined the bracelet line: " << b.name << " [" << b.bracelet << "]" << endl;
+        }
+        else{
+            cout << "\tJoined the bracelet line: No one" << endl;
+        }
+
+        // serving the bracelet people
+        if(!braceletLine.empty()){
+            Bracelet servedB = braceletLine.front();
+            braceletLine.erase(braceletLine.begin()); // get rid of the person who was just served
+            cout << "\tServed at the bracelet booth: " << servedB.name << " [" << servedB.bracelet << "]" << endl;
+        }
+        else{
+            cout << "\tServed at the bracelet booth: No one" << endl;
+        }
     }
     
     return 0;
