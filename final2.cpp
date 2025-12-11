@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <deque>
+#include <list>
 using namespace std;
 
 // Milestone 1
@@ -20,6 +21,12 @@ struct Muffin{
 struct Bracelet{
     string name;
     string bracelet;
+};
+
+// gonna make a toy booth using list as the last data structure
+struct Toy{
+    string name;
+    string toy;
 };
 
 // lemme try to find an old project with a linked list so i can modify that code
@@ -128,6 +135,12 @@ int main() {
         "Red Bracelet", "Braided Bracelet", "Black Bracelet", "Yellow Bracelet"
     };
 
+    vector<string> toys = {
+        "Teddy Bear", "Toy Car", "Action Figure", "Doll",
+        "Building Blocks", "Puzzle", "Toy Train",
+        "Stuffed Dinosaur", "Rubber Duck"
+    };
+
     Coffee coffeeLine;
     
     // muffin booth here, needs to store both name and drink
@@ -135,6 +148,9 @@ int main() {
 
     // bracelet line
     vector<Bracelet> braceletLine;
+
+    // toy line
+    list<Toy> toyLine;
 
     // ok now i gotta excercise the things done in this milestone, so i can just add liek 2 random customers and then serve one to test
     // milestone 2 i needa add 3 people to the line, now we need to add three to bnoth the muffin and coffee both
@@ -155,6 +171,12 @@ int main() {
         b.name = names[rand() % names.size()];
         b.bracelet = bracelets[rand() % bracelets.size()];
         braceletLine.push_back(b);
+
+        // add code for the toy people
+        Toy t;
+        t.name = names[rand() % names.size()];
+        t.toy = toys[rand() % toys.size()];
+        toyLine.push_back(t);
     }
 
     // i need to run the sim for 10 rounds now so lets get a for loop going
@@ -231,8 +253,32 @@ int main() {
         else{
             cout << "\tServed at the bracelet booth: No one" << endl;
         }
+
+        // toy time!
+        cout << endl;
+        if(rand() % 2 == 1){
+            Toy t;
+            t.name = names[rand() % names.size()];
+            t.toy = toys[rand() % toys.size()];
+            toyLine.push_back(t);
+            cout << "\tJoined the toy line: " << t.name << " [" << t.toy << "]" << endl;
+        }
+        else{
+            cout << "\tJoined the toy line: No one" << endl;
+        }
+
+        // now serving the toy people
+        if(!toyLine.empty()){
+            Toy servedT = toyLine.front();
+            toyLine.pop_front();
+            cout << "\tServed at the toy booth: " << servedT.name << " [" << servedT.toy << "]" << endl;
+        }
+        else{
+            cout << "\tServed at the toy booth: No one" << endl;
+        }
     }
-    
-    return 0;
+        return 0;
 }
+    
+
 
