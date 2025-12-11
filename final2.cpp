@@ -109,22 +109,39 @@ int main() {
     Coffee coffeeLine;
 
     // ok now i gotta excercise the things done in this milestone, so i can just add liek 2 random customers and then serve one to test
-    for(int i = 0; i < 2; i++){
+    // milestone 2 i needa add 3 people to the line
+    for(int i = 0; i < 3; i++){
         string n = names[rand() % names.size()];
         string d = drinks[rand() % drinks.size()];
         coffeeLine.push_back(n, d);
-        cout << "In line: " << n << " [" << d << "]" << endl;
+        // since later imma have different booths lemme be more specific here
+        cout << "Waiting at the coffee booth: " << n << " [" << d << "]" << endl;
     }
 
-    // now try serving someone here
-    string cName;
-    string cDrink;
-    // jere is where it is uselfukll that i made it a bool as now i can check if someone is or is not served
-    if(coffeeLine.pop_front(cName, cDrink)){
-        cout << "Served: " << cName << " [" << cDrink << "]" << endl;
-    }
-    else{
-        cout << "Noone served" << endl;
+    // i need to run the sim for 10 rounds now so lets get a for loop going
+    for(int i = 1; i <= 10; i++){
+        cout << "Round #" << i << ":" << endl;
+
+        // gotta add a 50% chance for someone joining, so mod 2 == 1 should simulate that 
+        if(rand() % 2 == 1){
+            string n = names[rand() % names.size()];
+            string d = drinks[rand() % drinks.size()];
+            coffeeLine.push_back(n, d);
+            cout << "\tJoined the coffee booth line: " << n << " [" << d << "]" << endl;
+        }
+        else {
+            cout << "\tJoined the coffee booth line: No one" << endl;
+        }
+
+        // every round the first person in line needs to be served
+        string cName;
+        string cDrink;
+        if(coffeeLine.pop_front(cName, cDrink)){
+            cout << "\tServed at the coffee booth: " << cName << " [" << cDrink << "]" << endl;
+        }
+        else{
+            cout << "\tServed at the coffee booth: No one" << endl;
+        }
     }
     
     return 0;
