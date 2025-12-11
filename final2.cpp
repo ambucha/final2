@@ -119,6 +119,14 @@ int main() {
     // now try serving someone here
     string cName;
     string cDrink;
-    // jere is 
-    if(coffeeLine.pop_front)
+    // jere is where it is uselfukll that i made it a bool as now i can check if someone is or is not served
+    if(coffeeLine.pop_front(cName, cDrink)){
+        cout << "Served: " << cName << " [" << cDrink << "]" << endl;
+    }
+    else{
+        cout << "Noone served" << endl;
+    }
+    
+    return 0;
 }
+
