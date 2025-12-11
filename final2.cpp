@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 // Milestone 1
@@ -64,4 +66,59 @@ class Coffee{
 
                 head = temp->next;
 
+                // if has nodes
+                if(head){
+                    head->prev = nullptr;
+                }
+                else{
+                    tail = nullptr;
+                }
+
+                // free the og head
+                delete temp;
+                return true;
+            }
+
+            // destructor
+            ~Coffee() {
+                while (head) {
+                    Node* temp = head;
+                    head = head->next;
+                    delete temp;
+                }
+            }
 };
+
+// main functino time
+int main() {
+
+    srand(time(0));
+
+    // lemme get some names and drink names for to pull randomly into the coffee line
+    vector<string> names = {
+        "Ava", "Mateo", "Noah", "Mia", "Sofia", "Liam", "Kai", "Zoe",
+        "Ethan", "Aria", "Leo", "Nora", "Jayden", "Ivy", "Owen", "Luna",
+        "Lucas", "Amelia", "Elijah", "Isabella", "Benjamin", "Charlotte"
+    };
+    
+    vector<string> drinks = {
+        "Latte", "Cappuccino", "Americano", "Mocha", "Cold Brew",
+        "Espresso", "Iced Coffee", "Vanilla Latte", "Caramel Latte"
+    };
+
+    Coffee coffeeLine;
+
+    // ok now i gotta excercise the things done in this milestone, so i can just add liek 2 random customers and then serve one to test
+    for(int i = 0; i < 2; i++){
+        string n = names[rand() % names.size()];
+        string d = drinks[rand() % drinks.size()];
+        coffeeLine.push_back(n, d);
+        cout << "In line: " << n << " [" << d << "]" << endl;
+    }
+
+    // now try serving someone here
+    string cName;
+    string cDrink;
+    // jere is 
+    if(coffeeLine.pop_front)
+}
